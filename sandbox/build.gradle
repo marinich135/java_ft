@@ -3,4 +3,12 @@ apply plugin: 'application'
 mainClassName = "ru.stqa.pft.sandbox.MyFirstProgram"
 mainClassName = "ru.stqa.pft.sandbox.MySecondProgram"
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.testng:testng:7.1.0'
+}
+
 
