@@ -13,11 +13,11 @@ public class ContactCreationTests {
     System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.get("http://localhost/addressbook/");
+    login();
   }
 
-  @Test
-  public void testContactCreation() throws Exception {
-    wd.get("http://localhost/addressbook/");
+  private void login() {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
@@ -25,7 +25,31 @@ public class ContactCreationTests {
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
-    wd.findElement(By.linkText("add new")).click();
+  }
+
+  @Test
+  public void testContactCreation() throws Exception {
+
+    gotoCreateContactPage();
+    fillContactForm();
+    submitContactCreation();
+    gotoHomePage();
+    logOut();
+  }
+
+  private void logOut() {
+    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void gotoHomePage() {
+    wd.findElement(By.linkText("home")).click();
+  }
+
+  private void submitContactCreation() {
+    wd.findElement(By.name("submit")).click();
+  }
+
+  private void fillContactForm() {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys("Ivan");
@@ -51,9 +75,10 @@ public class ContactCreationTests {
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys("ivanov@mail.ru");
-    wd.findElement(By.name("submit")).click();
-    wd.findElement(By.linkText("home")).click();
-    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void gotoCreateContactPage() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterMethod(alwaysRun = true)
