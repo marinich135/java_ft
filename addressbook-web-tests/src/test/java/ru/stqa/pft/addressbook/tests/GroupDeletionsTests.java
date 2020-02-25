@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
 
@@ -6,10 +6,10 @@ public class GroupDeletionsTests extends TestBase{
 
   @Test
   public void testGroupDeletions() throws Exception {
-    gotoGroupPage();
-    selectGroup();
-    deleteSelectedGroups();
-    returnToGroupPage();
+    app.gotoGroupPage();
+    app.selectGroup();
+    app.deleteSelectedGroups();
+    app.returnToGroupPage();
   }
 
 
