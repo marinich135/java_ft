@@ -62,15 +62,6 @@ public class ApplicationManager {
     navigationHelper.gotoGroupPage();
   }
 
-  private boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
   public ContactHelper getContactHelper() {
     return contactHelper;
   }
