@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,8 +9,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+
   protected WebDriver wd;
 
+  private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
@@ -18,6 +21,7 @@ public class ApplicationManager {
     wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
+    contactHelper = new ContactHelper(wd);
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
@@ -26,10 +30,11 @@ public class ApplicationManager {
 
 
   public void logOut() {
+
     wd.findElement(By.xpath("//div[@id='top']/form/a")).click();
   }
 
-  public void stop() {
+  public void stop()  {
     wd.quit();
   }
 
@@ -43,14 +48,31 @@ public class ApplicationManager {
   }
 
   public GroupHelper getGroupHelper() {
+
     return groupHelper;
   }
 
   public NavigationHelper getNavigationHelper() {
+
     return navigationHelper;
   }
 
   public void gotoGroupPage() {
+
     navigationHelper.gotoGroupPage();
   }
+
+  private boolean isAlertPresent() {
+    try {
+      wd.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  public ContactHelper getContactHelper() {
+    return contactHelper;
+  }
+
 }
