@@ -4,43 +4,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class ContactHelper {
-  private WebDriver wd;
+public class ContactHelper extends HelperBase{
 
   public ContactHelper(WebDriver wd) {
-    this.wd = wd;
-  }
+    super(wd);
+   }
 
   public void fillContactForm(ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstname());
-    wd.findElement(By.name("middlename")).click();
-    wd.findElement(By.name("middlename")).clear();
-    wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
-    wd.findElement(By.name("lastname")).click();
-    wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-    wd.findElement(By.name("nickname")).click();
-    wd.findElement(By.name("nickname")).clear();
-    wd.findElement(By.name("nickname")).sendKeys(contactData.getNickname());
-    wd.findElement(By.name("company")).click();
-    wd.findElement(By.name("company")).clear();
-    wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
-    wd.findElement(By.name("address")).click();
-    wd.findElement(By.name("address")).clear();
-    wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-    wd.findElement(By.xpath("//div[@id='content']/form/label[9]")).click();
-    wd.findElement(By.name("mobile")).click();
-    wd.findElement(By.name("mobile")).clear();
-    wd.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
-    wd.findElement(By.name("email")).click();
-    wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
-  }
+    type(By.name("middlename"),contactData.getMiddlename());
+    type(By.name("lastname"),contactData.getLastname());
+    type(By.name("nickname"),contactData.getNickname());
+    type(By.name("company"),contactData.getCompany());
+    type(By.name("address"),contactData.getAddress());
+    click(By.xpath("//div[@id='content']/form/label[9]"));
+    type(By.name("mobile"),contactData.getMobile());
+    type(By.name("email"),contactData.getEmail());
 
-  private void type(By locator, String text) {
-    wd.findElement(locator).click();
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
   }
 
   public void gotoCreateContactPage() {
