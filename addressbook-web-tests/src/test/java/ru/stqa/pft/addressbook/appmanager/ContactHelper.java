@@ -68,4 +68,13 @@ public class ContactHelper extends HelperBase{
   public void submitContactModifications() {
     click(By.xpath("(//input[@name='update'])[2]"));
   }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void createContact(ContactData contactData, boolean creation) {
+    fillContactForm (contactData, creation);
+    submitContactCreation();
+  }
 }
