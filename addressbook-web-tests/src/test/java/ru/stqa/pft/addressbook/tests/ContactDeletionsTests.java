@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -11,7 +12,7 @@ public class ContactDeletionsTests extends TestBase {
   public void testContactDeletions () {
 
     app.getContactHelper().gotoHomePage();
-
+    int before = app.getContactHelper().getContactCount();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().gotoCreateContactPage();
       app.getContactHelper().createContact(new ContactData("Ivan", "Sergeevich", "Petrov", "Frog", "TTI", "Moscow, Pobedy str", "89214567821", "ivanov@mail.ru", "test1"), true);
@@ -20,6 +21,9 @@ public class ContactDeletionsTests extends TestBase {
     app.getContactHelper().selectContact();
     app.getContactHelper().deleteSelectedContacts();
     app.getContactHelper().acceptAlert();
-
+    app.getContactHelper().gotoHomePage();
+    int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after,before - 1);
   }
+
 }
