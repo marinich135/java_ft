@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().gotoHomePage();
     }
     
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before-1);
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Igor", "Vladimirovich","Kuzmenko","Izya","TOR","Moscow", "8952365843","Igoryan@mail.ru", null), false);
     app.getContactHelper().submitContactModifications();
