@@ -15,19 +15,6 @@ public class ContactData {
   private String group;
 
   @Override
-  public String toString() {
-    return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            '}';
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -40,6 +27,19 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            '}';
+  }
+
+  public String getId() {
+    return id;
   }
 
   public ContactData(String firstname, String middlename, String lastname, String nickname, String company, String address, String mobile, String email, String group) {
