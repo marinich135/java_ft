@@ -7,6 +7,8 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.HashSet;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification () {
@@ -20,11 +22,11 @@ public class ContactModificationTests extends TestBase {
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size()-1);
     app.getContactHelper().initContactModification();
-    ContactData contact = new ContactData("Ivan", "Sergeevich", "Petrov", "Frog", "TTI", "Moscow, Pobedy str", "89214567821", "ivanov@mail.ru", "test1");
+    ContactData contact = new ContactData(before.get(before.size()-1).getId(), "Ivan", "Sergeevich", "null", "Frog", "TTI", "Moscow, Pobedy str", "89214567821", "ivanov@mail.ru", "test1");
     app.getContactHelper().submitContactModifications();
     app.getContactHelper().gotoHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size());
+    assertEquals(after.size(), before.size());
 
     before.remove(before.size() - 1);
     before.add(contact);
