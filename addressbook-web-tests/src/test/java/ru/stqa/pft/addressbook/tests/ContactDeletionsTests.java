@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ContactDeletionsTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactDeletions () {
 
     app.getContactHelper().gotoHomePage();
