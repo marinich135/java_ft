@@ -77,7 +77,7 @@ public class ContactHelper extends HelperBase{
     return isElementPresent(By.xpath("//img[@alt='Edit']"));
   }
 
-  public void createContact(ContactData contactData, boolean creation) {
+  public void create(ContactData contactData, boolean creation) {
     fillContactForm (contactData, creation);
     submitContactCreation();
   }
@@ -86,7 +86,7 @@ public class ContactHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
