@@ -20,8 +20,7 @@ public class ContactModificationTests extends TestBase {
       app.Contact().gotoHomePage();
     }
     List<ContactData> before = app.Contact().list();
-    app.Contact().selectContact(before.size()-1);
-    app.Contact().initContactModification();
+    app.Contact().initContactModification(before.size()-1);
     ContactData contact = new ContactData(before.get(before.size()-1).getId(), "Ivan", "Sergeevich", "Petrov", "Frog", "TTI", "Moscow, Pobedy str", "89214567821", "ivanov@mail.ru", "test1");
     app.Contact().submitContactModifications();
     app.Contact().gotoHomePage();
