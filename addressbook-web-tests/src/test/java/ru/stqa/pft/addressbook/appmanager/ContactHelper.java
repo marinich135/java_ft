@@ -76,15 +76,22 @@ public class ContactHelper extends HelperBase{
   }
 
   public void create(ContactData contactData, boolean creation) {
-    fillContactForm (contactData, creation);
+    fillContactForm (contactData, true);
     submitContactCreation();
+    gotoHomePage();
   }
 
-  public void modifyContact(int index, ContactData contact) {
+  public void modify(int index, ContactData contact) {
     selectContact(index);
     initContactModification(index);
     fillContactForm(contact, false);
     submitContactModifications();
+    gotoHomePage();
+  }
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContacts();
+    acceptAlert();
     gotoHomePage();
   }
 
