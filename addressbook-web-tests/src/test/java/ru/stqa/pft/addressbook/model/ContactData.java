@@ -19,6 +19,21 @@ public class ContactData {
     return id;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ContactData)) return false;
+    ContactData that = (ContactData) o;
+    return getId() == that.getId() &&
+            Objects.equals(getFirstname(), that.getFirstname()) &&
+            Objects.equals(getLastname(), that.getLastname());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getFirstname(), getLastname());
+  }
+
   public String getFirstname() {
     return firstname;
   }
@@ -113,19 +128,6 @@ public class ContactData {
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             '}';
-  }
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(firstname, lastname);
   }
 
 }
