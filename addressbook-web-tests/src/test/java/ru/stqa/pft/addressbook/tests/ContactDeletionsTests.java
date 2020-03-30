@@ -13,7 +13,7 @@ public class ContactDeletionsTests extends TestBase {
     app.Contact().gotoHomePage();
     if (app.Contact().list().size() == 0) {
       app.Contact().gotoCreateContactPage();
-      app.Contact().create(new ContactData("Ivan", "Sergeevich", "Petrov", "Frog", "TTI", "Moscow, Pobedy str", "89214567821", "ivanov@mail.ru", "test1"), false);
+      app.Contact().create(new ContactData().withFirstname("Anton").withLastname("Petrov").withGroup("[none]"), true);
     }
   }
   @Test
