@@ -80,6 +80,7 @@ import java.util.Set;
   public void create(ContactData contactData, boolean creation) {
     fillContactForm (contactData, true);
     submitContactCreation();
+    contactCach = null;
     gotoHomePage();
   }
 
@@ -87,6 +88,7 @@ import java.util.Set;
     selectContactById(contact.getId());
     fillContactForm(contact, false);
     submitContactModifications();
+    contactCach = null;
     gotoHomePage();
   }
 
@@ -94,7 +96,7 @@ import java.util.Set;
   public void delete(ContactData Contact) {
     selectContactById(Contact.getId());
     deleteSelectedContacts();
-
+    contactCach = null;
     gotoHomePage();
   }
 
@@ -102,17 +104,22 @@ import java.util.Set;
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Contacts contactCach = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCach != null) {
+      return new Contacts(contactCach);
+    }
+    contactCach = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname("Petrov"));
+      contactCach.add(new ContactData().withId(id).withFirstname(firstname).withLastname("Petrov"));
     }
-    return contacts;
+    return new Contacts(contactCach);
   }
 
   }
