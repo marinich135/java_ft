@@ -100,7 +100,7 @@ import java.util.Set;
     gotoHomePage();
   }
 
-  public int getContactCount() {
+  public int Count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 

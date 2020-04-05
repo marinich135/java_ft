@@ -23,8 +23,8 @@ public class ContactDeletionsTests extends TestBase {
     Contacts before = app.Contact().all();
     ContactData deletedContact = before.iterator().next();
     app.Contact().delete(deletedContact);
+    assertThat(app.Contact().Count(),equalTo(before.size() - 1));
     Contacts after = app.Contact().all();
-    assertEquals(after.size(), before.size() - 1);
     assertThat(after, equalTo(before.without(deletedContact)));
 
   }
