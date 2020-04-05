@@ -32,7 +32,7 @@ public class ContactModificationTests extends TestBase {
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId()).withFirstname("Anton").withMiddlename("Sergeevich").withLastname("Petrov")
-            .withAddress("Moscow, Pobedy str").withMobile("89214567821").withGroup("[none]");
+            .withAddress("Moscow, Pobedy str").withMobilePhone("89214567821").withGroup("[none]");
     app.Contact().modify(contact);
     assertThat(app.Contact().Count(),equalTo(before.size()));
     Contacts after = app.Contact().all();
