@@ -77,7 +77,7 @@ import java.util.List;
   }
 
   public void create(ContactData contactData, boolean creation) {
-    fillContactForm (contactData, true);
+    fillContactForm(contactData, creation);
     submitContactCreation();
     contactCach = null;
     gotoHomePage();
