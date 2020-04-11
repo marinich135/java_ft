@@ -21,6 +21,7 @@ public class ContactData {
   private  String allPhones;
   private  String allEmails;
   private  String allAddresses;
+  private  String group;
 
   public File getPhoto() {
     return photo;
@@ -107,21 +108,6 @@ public class ContactData {
     return id;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof ContactData)) return false;
-    ContactData that = (ContactData) o;
-    return getId() == that.getId() &&
-            Objects.equals(getFirstname(), that.getFirstname()) &&
-            Objects.equals(getLastname(), that.getLastname());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getId(), getFirstname(), getLastname());
-  }
-
   public String getFirstname() {
     return firstname;
   }
@@ -154,7 +140,6 @@ public class ContactData {
     return group;
   }
 
-  private String group;
   public ContactData withId(int id) {
     this.id = id;
     return this;
@@ -193,6 +178,22 @@ public class ContactData {
   public ContactData withGroup(String group) {
     this.group = group;
     return this;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ContactData)) return false;
+    ContactData that = (ContactData) o;
+    return getId() == that.getId() &&
+            Objects.equals(getFirstname(), that.getFirstname()) &&
+            Objects.equals(getLastname(), that.getLastname());
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(getId(), getFirstname(), getLastname());
   }
 
   @Override
