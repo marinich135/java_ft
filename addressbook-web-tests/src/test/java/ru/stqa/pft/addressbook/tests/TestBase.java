@@ -8,15 +8,15 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  protected static final ApplicationManager app
+          = new ApplicationManager(System.getProperty("browser"));
 
-  @BeforeSuite(alwaysRun = true)
+  @BeforeSuite
   public void setUp() throws Exception {
-    System.setProperty("webdriver.chrome.driver", "C:\\Windows\\System32\\chromedriver.exe");
     app.init();
   }
 
-  @AfterSuite(alwaysRun = true)
+  @AfterSuite
   public void tearDown() throws Exception {
     app.stop();
   }

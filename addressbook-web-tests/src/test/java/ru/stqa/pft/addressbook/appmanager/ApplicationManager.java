@@ -20,7 +20,8 @@ public class ApplicationManager {
   private GroupHelper groupHelper;
   private String browser;
 
-  public ApplicationManager(String browser) {
+  public ApplicationManager(String browser)
+  {
     this.browser = browser;
   }
 
@@ -32,7 +33,7 @@ public class ApplicationManager {
     } else if (browser == BrowserType.IE) {
       wd = new InternetExplorerDriver();
     }
-    wd.manage().timeouts().implicitlyWait(0,TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
     contactHelper = new ContactHelper(wd);
     groupHelper = new GroupHelper(wd);
