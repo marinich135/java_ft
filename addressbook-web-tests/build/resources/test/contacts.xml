@@ -1,0 +1,16 @@
+<list>
+  <contact>
+    <firstname>Ivanov 0</firstname>
+    <lastname>Petrov</lastname>
+    <address>Moscow 0</address>
+    <email>kto@mail.ru</email>
+    <group>[none]</group>
+  </contact>
+  <contact>
+    <firstname>Ivanov 1</firstname>
+    <lastname>Petrov</lastname>
+    <address>Moscow 1</address>
+    <email>kto@mail.ru</email>
+    <group>[none]</group>
+  </contact>
+</list>
