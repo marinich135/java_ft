@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.pft.addressbook.tests.ContactCreationTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-04-12T08:21:27" hostname="DESKTOP-3R60AU8" time="5.614">
+  <properties/>
+  <testcase name="testContactCreation[0](ContactData{id='0', firstname='Ivanov 0', lastname='Petrov'})" classname="ru.stqa.pft.addressbook.tests.ContactCreationTests" time="3.456"/>
+  <testcase name="testContactCreation[1](ContactData{id='0', firstname='Ivanov 1', lastname='Petrov'})" classname="ru.stqa.pft.addressbook.tests.ContactCreationTests" time="2.156"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Security framework of XStream not initialized, XStream is probably vulnerable.
+[1586679687.558][SEVERE]: Timed out receiving message from renderer: 0.100
+]]></system-err>
+</testsuite>

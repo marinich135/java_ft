@@ -31,7 +31,7 @@ public class ContactCreationTests extends TestBase{
       return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
   }
-  
+
     @Test(dataProvider = "validContacts")
     public void testContactCreation (ContactData contact){
       app.Contact().gotoHomePage();
