@@ -4,11 +4,18 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase {
 
+  private Properties properties;
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().GroupPage();
@@ -19,11 +26,13 @@ public class GroupModificationTests extends TestBase {
   }
 
   @Test
-  public void testGroupModification() {
+  public void testGroupModification() throws IOException {
+    properties = new Properties();
+    properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
+            .withId(modifiedGroup.getId()).withName(properties.getProperty("web.groupName")).withHeader(properties.getProperty("web.groupHeader")).withFooter(properties.getProperty("web.groupFooter"));
     app.group().modify(group);
     assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();
