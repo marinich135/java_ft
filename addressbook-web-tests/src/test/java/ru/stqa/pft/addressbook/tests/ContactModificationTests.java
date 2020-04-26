@@ -25,10 +25,11 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.Contact().gotoHomePage();
-    if ( app.Contact().all().size() == 0) {
+
+    if ( app.db().contacts().size() == 0) {
       app.Contact().gotoCreateContactPage();
-      app.Contact().create(new ContactData().withFirstname(properties.getProperty("web.firstName")).withGroup(properties.getProperty("web.group")), true);
+      app.Contact().create(new ContactData().withFirstname(properties.getProperty("web.firstName"))
+              .withGroup(properties.getProperty("web.group")), true);
     }
   }
 
@@ -36,14 +37,20 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification () throws IOException {
     properties = new Properties();
     properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
-    Contacts before = app.Contact().all();
+    Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
-            .withId(modifiedContact.getId()).withFirstname(properties.getProperty("web.firstName")).withMiddlename(properties.getProperty("web.middlename")).withLastname(properties.getProperty("web.lastName"))
-            .withAddress(properties.getProperty("web.address")).withMobilePhone(properties.getProperty("web.mobilephone")).withGroup(properties.getProperty("web.group"));
+            .withId(modifiedContact.getId())
+            .withFirstname(properties.getProperty("web.firstName"))
+            .withMiddlename(properties.getProperty("web.middlename"))
+            .withLastname(properties.getProperty("web.lastName"))
+            .withAddress(properties.getProperty("web.address"))
+            .withMobilePhone(properties.getProperty("web.mobilephone"))
+            .withGroup(properties.getProperty("web.group"));
+    app.Contact().gotoHomePage();
     app.Contact().modify(contact);
     assertThat(app.Contact().Count(),equalTo(before.size()));
-    Contacts after = app.Contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 

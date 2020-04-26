@@ -35,11 +35,11 @@ public class ContactCreationTests extends TestBase{
     @Test(dataProvider = "validContacts")
     public void testContactCreation (ContactData contact){
       app.Contact().gotoHomePage();
-      Contacts before = app.Contact().all();
+      Contacts before = app.db().contacts();
       app.Contact().gotoCreateContactPage();
       app.Contact().create(contact, true);
       assertThat(app.Contact().Count(), equalTo(before.size() + 1));
-      Contacts after = app.Contact().all();
+      Contacts after = app.db().contacts();
       assertThat(after, equalTo(
               before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }

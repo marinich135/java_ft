@@ -27,7 +27,6 @@ import java.util.List;
     click(By.xpath("//div[@id='content']/form/label[9]"));
     type(By.name("mobile"),contactData.getMobile());
     type(By.name("email"),contactData.getEmail());
-    attach(By.name("photo"), contactData.getPhoto());
 
     if(creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
