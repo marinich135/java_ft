@@ -1,23 +1,17 @@
 package ru.stqa.pft.addressbook.tests;
-
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+
 
 public class ContactModificationTests extends TestBase {
 
@@ -25,16 +19,17 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-
+    Groups groups = app.db().groups();
     if ( app.db().contacts().size() == 0) {
       app.Contact().gotoCreateContactPage();
       app.Contact().create(new ContactData().withFirstname(properties.getProperty("web.firstName"))
-              .withGroup(properties.getProperty("web.group")), true);
+              .inGroup(groups.iterator().next()), true);
     }
   }
 
   @Test
   public void testContactModification () throws IOException {
+    Groups groups = app.db().groups();
     properties = new Properties();
     properties.load(new FileReader(new File(String.format("src/test/resources/local.properties"))));
     Contacts before = app.db().contacts();
@@ -46,7 +41,7 @@ public class ContactModificationTests extends TestBase {
             .withLastname(properties.getProperty("web.lastName"))
             .withAddress(properties.getProperty("web.address"))
             .withMobilePhone(properties.getProperty("web.mobilephone"))
-            .withGroup(properties.getProperty("web.group"));
+            .inGroup(groups.iterator().next());
     app.Contact().gotoHomePage();
     app.Contact().modify(contact);
     assertThat(app.Contact().Count(),equalTo(before.size()));
