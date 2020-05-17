@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -146,4 +148,52 @@ import java.util.List;
 
     }
 
+    public void selectContactInCheckbox(int id)
+    {
+      wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    public void clickAddToGroup()
+    {
+      wd.findElement(By.name("add")).click();
+    }
+    public void clickRemoveContactFromGroup()
+    {
+      wd.findElement(By.name("remove")).click();
+    }
+
+    public void addContactToGroup(int id, ContactData contact, GroupData group) {
+      selectContactInCheckbox(id);
+      dropDownClick(String.format("//div[@id='content']/form[2]/div[4]/select/option[@value='%s']",group.getId()));
+      clickAddToGroup();
+      gotoHomePage();
+    }
+
+    public boolean isContactInGroup(ContactData contact, GroupData group){
+      if(contact.getGroups().size() == 0){
+        return false;
+      }
+      Groups contactGroups = contact.getGroups();
+      for (GroupData contactGroup:contactGroups){
+        if (contactGroup.equals(group)){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    public void clickOnGroupForDeletion()    {
+      wd.findElement(By.name("group")).click();
+    }
+    public void selectGroupFromFilterForDeletion() {
+      new Select(wd.findElement(By.name("group"))).selectByVisibleText("test1");
+    }
+
+    public void deleteContactFromGroup(ContactData contact, GroupData groupUnassigned) {
+      clickOnGroupForDeletion();
+      selectGroupFromFilterForDeletion();
+      selectContactInCheckbox(contact.getId());
+      clickRemoveContactFromGroup();
+      gotoHomePage();
+    }
   }
