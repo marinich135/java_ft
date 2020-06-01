@@ -186,7 +186,7 @@ import java.util.List;
       wd.findElement(By.name("group")).click();
     }
     public void selectGroupFromFilterForDeletion() {
-      new Select(wd.findElement(By.name("group"))).selectByVisibleText("test1");
+      new Select(wd.findElement(By.name("group"))).selectByVisibleText("test 1");
     }
 
     public void deleteContactFromGroup(ContactData contact, GroupData groupUnassigned) {
