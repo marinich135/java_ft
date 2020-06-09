@@ -6,6 +6,7 @@ public class NavigationHelper extends HelperBase {
   public NavigationHelper(ApplicationManager app) {
     super(app);
   }
+
   public void loginUI(){
     wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
     type(By.name("username"), app.getProperty("web.adminLogin"));
@@ -19,7 +20,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("Manage Users"));
   }
 
-  public  void resetPassword(){
+  public  void resetPassword(int id){
     click(By.xpath("//input[@value='Reset Password']"));
     click(By.linkText("Proceed"));
   }

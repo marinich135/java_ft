@@ -1,13 +1,29 @@
 package ru.stqa.pft.mantis.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "mantis_user_table")
 public class UserData {
 
+@Id
+@Column
   private int id;
+
+@Column
   private String username;
+
+@Column
   private String email;
+
+@Column
   private String password;
+
+@Column (name = "access_level")
   private int accessLevel;
 
   public int getId() {
@@ -50,6 +66,12 @@ public class UserData {
     return accessLevel;
   }
 
+  public UserData setAccessLevel(int accessLevel) {
+    this.accessLevel = accessLevel;
+    return this;
+
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -60,6 +82,17 @@ public class UserData {
             Objects.equals(username, userData.username) &&
             Objects.equals(email, userData.email) &&
             Objects.equals(password, userData.password);
+  }
+
+  @Override
+  public String toString() {
+    return "UserData{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            ", accessLevel=" + accessLevel +
+            '}';
   }
 
   @Override
