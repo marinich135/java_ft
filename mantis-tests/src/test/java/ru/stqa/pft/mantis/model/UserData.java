@@ -1,5 +1,7 @@
 package ru.stqa.pft.mantis.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +26,8 @@ public class UserData {
   private String password;
 
 @Column (name = "access_level")
-  private int accessLevel;
+@Type( type = "short")
+  private short accessLevel;
 
   public int getId() {
     return id;
@@ -66,7 +69,7 @@ public class UserData {
     return accessLevel;
   }
 
-  public UserData setAccessLevel(int accessLevel) {
+  public UserData setAccessLevel(short accessLevel) {
     this.accessLevel = accessLevel;
     return this;
 
