@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.pft.soap.GeoIpServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-12T07:53:40" hostname="DESKTOP-3R60AU8" time="0.639">
+  <properties/>
+  <testcase name="testMyIp" classname="ru.stqa.pft.soap.GeoIpServiceTests" time="0.639"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
