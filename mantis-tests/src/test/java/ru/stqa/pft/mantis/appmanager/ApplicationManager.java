@@ -26,6 +26,7 @@ public class ApplicationManager {
   private DbHelper dbHelper;
   public NavigationHelper navigationHelper;
   public UserHelper userHelper;
+  private SoapHelper soapHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -40,7 +41,7 @@ public class ApplicationManager {
   }
 
   public void stop() {
-    if (wd != null){
+    if (wd != null) {
       wd.quit();
     }
   }
@@ -82,26 +83,28 @@ public class ApplicationManager {
   }
 
   public WebDriver getDriver() {
-    if (wd == null){
+    if (wd == null) {
       if (browser.equals(BrowserType.CHROME)) {
         wd = new ChromeDriver();
-      } else if (browser.equals(BrowserType.FIREFOX)){
+      } else if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
       } else if (browser.equals(BrowserType.IE)) {
         wd = new InternetExplorerDriver();
       }
-      wd.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+      wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
       wd.get(properties.getProperty("web.baseUrl"));
 
     }
     return wd;
   }
-  public MailHelper mail(){
-    if(mailHelper == null) {
+
+  public MailHelper mail() {
+    if (mailHelper == null) {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
   }
+
   public UserHelper getUserHelper() {
     if (userHelper == null) {
       userHelper = new UserHelper(this);
@@ -109,15 +112,23 @@ public class ApplicationManager {
     return userHelper;
   }
 
-  public JamesHelper james(){
-    if (jamesHelper == null){
+  public JamesHelper james() {
+    if (jamesHelper == null) {
       jamesHelper = new JamesHelper(this);
     }
     return jamesHelper;
   }
 
-
+  public SoapHelper soap() {
+    if (soapHelper == null) {
+      soapHelper = new SoapHelper(this);
+    }
+    return soapHelper;
+  }
 }
+
+
+
 
 
 
