@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.stqa.pft.rest.RestTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-15T05:48:14" hostname="DESKTOP-3R60AU8" time="4.663">
+<testsuite name="ru.stqa.pft.rest.RestTests" tests="1" skipped="1" failures="0" errors="0" timestamp="2020-06-15T07:42:48" hostname="DESKTOP-3R60AU8" time="1.428">
   <properties/>
-  <testcase name="testCreateIssue" classname="ru.stqa.pft.rest.RestTests" time="4.663"/>
+  <testcase name="testCreateIssue" classname="ru.stqa.pft.rest.RestTests" time="1.428">
+    <skipped/>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
