@@ -1,65 +1,74 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class ContactDeleteFromGroupTests extends TestBase {
-  @BeforeMethod
+
+  ContactData helpContact = new ContactData()
+          .withLastname("test5").withFirstname("test5").withEmail("test5@mail.com");
+  GroupData helpGroup = new GroupData().withName("test5");
+
+  @BeforeClass
   public void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
       app.goTo().GroupPage();
-      app.group().create(new GroupData().withName("test1"));
+      app.group().create(helpGroup);
     }
+    Groups groups = app.db().groups();
 
     if (app.db().contacts().size() == 0) {
       app.Contact().gotoCreateContactPage();
-      app.Contact().create(new ContactData().withFirstname("test").withLastname("test1").withEmail("test@test.ru"), true);
-    }
-  }
+      app.Contact().create(helpContact.inGroup(groups.iterator().next()), true);
 
-  public List<Integer> validGroupAndContactID() {
-    Contacts contacts = app.db().contacts();
-    Groups groups = app.db().groups();
-
-    List<Integer> validGroupAndContactID = new ArrayList<>();
-    for (ContactData contact : contacts) {
-      for (GroupData group : groups) {
-        if (app.Contact().isContactInGroup(contact, group)) {
-          validGroupAndContactID.add(group.getId());
-          validGroupAndContactID.add(contact.getId());
-          return validGroupAndContactID;
-        }
-      }
     }
-    return validGroupAndContactID;
   }
 
   @Test
   public void testContactDeleteFromGroup() {
-    List<Integer> validID= validGroupAndContactID();
-    Contacts before = app.db().contacts();
+
+    ContactData userAfter = null;
+    ContactData userSelect;
+    GroupData groupSelect = null;
+
+    Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
-
-    ContactData modifiedContact = before.stream().filter(data -> Objects.equals(data.getId(), validID.get(1))).findFirst().get();
-    GroupData groupUnassigned = groups.stream().filter(data -> Objects.equals(data.getId(), validID.get(0))).findFirst().get();
-
-    ContactData contact = modifiedContact;
-
-
     app.Contact().gotoHomePage();
-    app.Contact().deleteContactFromGroup(contact, groupUnassigned);
-    Contacts after = app.db().contacts();
-    ContactData contactModifiedDb = after.stream().filter(data -> Objects.equals(data.getId(), modifiedContact.getId())).findFirst().get();
-    Assert.assertFalse(app.Contact().isContactInGroup(contactModifiedDb, groupUnassigned ));
-  }
+    userSelect = contacts.iterator().next();
 
-}
+    for (ContactData currentUser : contacts) {
+      Groups currentGroup = currentUser.getGroups();
+      if (currentGroup.size() > 0) {
+        userSelect = currentUser;
+        groupSelect = currentUser.getGroups().iterator().next();
+        break;
+      }
+    }
+
+    if (userSelect.getGroups().size() == 0) {
+      groupSelect = groups.iterator().next();
+      app.Contact().selectedGroup(userSelect, groupSelect);
+    }
+    app.Contact().gotoHomePage();
+    app.Contact().selectGroupFromFilterForDeletion(groupSelect);
+    app.Contact().selectContactById(userSelect.getId());
+    app.Contact().clickRemoveContactFromGroup();
+    app.Contact().gotoHomePage();
+
+    Contacts usersAllAfter = app.db().contacts();
+    for (ContactData userChoiceAfter : usersAllAfter) {
+      if (userChoiceAfter.getId() == userSelect.getId()) {
+        userAfter = userChoiceAfter;
+      }
+      assertThat(userSelect.getGroups(), equalTo(userAfter.getGroups().without(groupSelect)));
+    }
+  }
+  }

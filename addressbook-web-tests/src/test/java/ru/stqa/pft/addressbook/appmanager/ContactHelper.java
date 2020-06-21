@@ -12,8 +12,10 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
+import static javafx.beans.binding.Bindings.select;
 
-  public class ContactHelper extends HelperBase{
+
+public class ContactHelper extends HelperBase{
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -58,7 +60,8 @@ import java.util.List;
 
   public void selectContactById(int id) {
 
-    wd.findElement((By.cssSelector("a[href*='edit.php?id=" + id + "']"))).click();
+    //wd.findElement((By.cssSelector("a[href*='edit.php?id=" + id + "']"))).click();
+    click(By.cssSelector("input[value='" + id + "']"));
   }
 
   public void deleteSelectedContacts() {
@@ -81,7 +84,7 @@ import java.util.List;
   }
 
   public void create(ContactData contactData, boolean creation) {
-    fillContactForm(contactData, creation);
+    fillContactForm(contactData, true);
     submitContactCreation();
     contactCach = null;
     gotoHomePage();
@@ -147,6 +150,9 @@ import java.util.List;
              .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
 
     }
+    public void allGroupsOnUserPage() {
+      new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
 
     public void selectContactInCheckbox(int id)
     {
@@ -160,6 +166,7 @@ import java.util.List;
     public void clickRemoveContactFromGroup()
     {
       wd.findElement(By.name("remove")).click();
+      //click(By.cssSelector("input[type='submit']"));
     }
 
     public void addContactToGroup(int id, ContactData contact, GroupData group) {
@@ -185,15 +192,34 @@ import java.util.List;
     public void clickOnGroupForDeletion()    {
       wd.findElement(By.name("group")).click();
     }
-    public void selectGroupFromFilterForDeletion() {
-      new Select(wd.findElement(By.name("group"))).selectByVisibleText("test 1");
+
+    public void selectGroupFromFilterForDeletion(GroupData group) {
+      String groupId = String.valueOf(group.getId());
+      new Select(wd.findElement(By.name("group"))).selectByValue(groupId);
     }
 
     public void deleteContactFromGroup(ContactData contact, GroupData groupUnassigned) {
+      gotoHomePage();
       clickOnGroupForDeletion();
-      selectGroupFromFilterForDeletion();
+      //selectGroupFromFilterForDeletion(groupSelect);
       selectContactInCheckbox(contact.getId());
       clickRemoveContactFromGroup();
       gotoHomePage();
+    }
+
+    public void choiceGroup(String nameGroup) {
+      select(By.name("to_group"), nameGroup);
+    }
+
+    public void selectGroupFilterByName(GroupData group) {
+      String groupId = String.valueOf(group.getId());
+      new Select(wd.findElement(By.name("to_group"))).selectByValue(groupId);
+    }
+    public void selectedGroup(ContactData user, GroupData group){
+      selectContactInCheckbox(user.getId());
+      String groupId = String.valueOf(group.getId());
+      new Select(wd.findElement(By.name("to_group"))).selectByValue(groupId);
+      clickAddToGroup();
+      contactCach = null;
     }
   }
