@@ -104,4 +104,8 @@ public class ApplicationManager {
     return dbHelper;
   }
 
+  public byte[] takeScreenshot(){
+    return ((TakesScreenshot)wd).getScreenshotAs(OutputType.BYTES);
+  }
+
 }

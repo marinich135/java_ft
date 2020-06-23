@@ -1,0 +1,87 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "Suite1",
+    "children" : [ {
+      "name" : "testBadGroupCreation",
+      "uid" : "a59568713b95bb47",
+      "parentUid" : "1b55da8b4eccbbb6df84e16f476662eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1592893541835,
+        "stop" : 1592893544479,
+        "duration" : 2644
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "testGroupCreation[GroupData{id='2147483647', name='test 0'}]",
+      "uid" : "6ddb7a1166eefd71",
+      "parentUid" : "1b55da8b4eccbbb6df84e16f476662eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1592893544826,
+        "stop" : 1592893546552,
+        "duration" : 1726
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "testGroupCreation[GroupData{id='2147483647', name='test 1'}]",
+      "uid" : "43cc17cddf72211c",
+      "parentUid" : "1b55da8b4eccbbb6df84e16f476662eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1592893546639,
+        "stop" : 1592893548204,
+        "duration" : 1565
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "testGroupCreation[GroupData{id='2147483647', name='test 2'}]",
+      "uid" : "b4ad5c2b09f70de5",
+      "parentUid" : "1b55da8b4eccbbb6df84e16f476662eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1592893548211,
+        "stop" : 1592893549686,
+        "duration" : 1475
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "testGroupDeletions",
+      "uid" : "e4558855d06deece",
+      "parentUid" : "1b55da8b4eccbbb6df84e16f476662eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1592893549697,
+        "stop" : 1592893550413,
+        "duration" : 716
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "testGroupModification",
+      "uid" : "25e3fe6c11a19510",
+      "parentUid" : "1b55da8b4eccbbb6df84e16f476662eb",
+      "status" : "passed",
+      "time" : {
+        "start" : 1592893550419,
+        "stop" : 1592893552602,
+        "duration" : 2183
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "1b55da8b4eccbbb6df84e16f476662eb"
+  } ]
+}

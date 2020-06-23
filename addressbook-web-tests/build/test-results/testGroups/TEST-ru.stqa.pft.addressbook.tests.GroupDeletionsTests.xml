@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.stqa.pft.addressbook.tests.GroupDeletionsTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-19T16:08:49" hostname="DESKTOP-3R60AU8" time="1.946">
+<testsuite name="ru.stqa.pft.addressbook.tests.GroupDeletionsTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-23T06:25:49" hostname="DESKTOP-3R60AU8" time="0.716">
   <properties/>
-  <testcase name="testGroupDeletions" classname="ru.stqa.pft.addressbook.tests.GroupDeletionsTests" time="1.946"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="testGroupDeletions" classname="ru.stqa.pft.addressbook.tests.GroupDeletionsTests" time="0.716"/>
+  <system-out><![CDATA[09:25:49.694 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Start testtestGroupDeletionswith parameters[]
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+09:25:50.414 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Stop testtestGroupDeletions
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
